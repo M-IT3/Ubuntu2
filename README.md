@@ -298,9 +298,11 @@ aria2c --enable-rpc --rpc-listen-port=6800 -D -d ~/Downloads/Aria/
 
 # 7️⃣ JDownloader
 sudo apt install -y default-jre
-mkdir -p ~/jd2/JDownloader2
-wget http://installer.jdownloader.org/JDownloader2Setup_unix_nojre.sh -O ~/jd2/setup.sh
-chmod +x ~/jd2/setup.sh && ./~/jd2/setup.sh -q -dir ~/jd2/JDownloader2
+mkdir -p /home/ubuntu/JDownloader2
+wget http://installer.jdownloader.org/JDownloader2Setup_unix_nojre.sh -O /home/ubuntu/JDownloader2/setup.sh
+chmod +x /home/ubuntu/JDownloader2/setup.sh
+/home/ubuntu/JDownloader2/setup.sh -q -dir /home/ubuntu/JDownloader2
+
 
 # 8️⃣ Monitoring
 sudo apt install -y glances
