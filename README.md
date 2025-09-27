@@ -141,7 +141,8 @@ sudo apt install -y nginx php php-fpm
 # Directory to host files
 mkdir -p ~/Downloads/http
 chmod -R 755 ~/Downloads/http
-chown -R $USER:$USER ~/Downloads/http
+sudo chown -R ubuntu:ubuntu /home/ubuntu/Downloads/http
+sudo chmod -R 755 /home/ubuntu/Downloads/http
 
 # Default site config
 cat <<'EOF' | sudo tee /etc/nginx/sites-available/default > /dev/null
