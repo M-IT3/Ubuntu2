@@ -40,6 +40,13 @@ sudo apt install ubuntu-desktop -y
 sudo systemctl set-default graphical.target
 ```
 
+### KDE Plasma (Kubuntu) lighter than GNOME.
+```bash
+sudo apt install kubuntu-desktop -y
+# Optional: set graphical.target as default boot target
+sudo systemctl set-default graphical.target
+```
+
 ### XFCE (lighter alternative)
 ```bash
 sudo apt install xfce4 xfce4-goodies -y
