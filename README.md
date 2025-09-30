@@ -143,6 +143,9 @@ mkdir -p ~/Downloads/http
 chmod -R 755 ~/Downloads/http
 sudo chown -R ubuntu:ubuntu /home/ubuntu/Downloads/http
 sudo chmod -R 755 /home/ubuntu/Downloads/http
+sudo chmod o+x /home
+sudo chmod o+x /home/ubuntu
+sudo chmod o+x /home/ubuntu/Downloads
 
 # Default site config
 cat <<'EOF' | sudo tee /etc/nginx/sites-available/default > /dev/null
