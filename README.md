@@ -313,6 +313,7 @@ aria2c --enable-rpc \
   aria2c --enable-rpc \
   --rpc-listen-all=true \
   --rpc-listen-port=6800 \
+  --max-upload-limit=300 \
   -D \
   -d ~/Downloads/Aria/ \
   --max-connection-per-server=16 \
