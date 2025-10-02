@@ -310,6 +310,8 @@ mkdir -p ~/Downloads/Aria
 chmod -R 755 ~/Downloads/Aria
 
 aria2c --enable-rpc \
+  aria2c --enable-rpc \
+  --rpc-listen-all=true \
   --rpc-listen-port=6800 \
   -D \
   -d ~/Downloads/Aria/ \
@@ -324,6 +326,7 @@ aria2c --enable-rpc \
   --disable-ipv6=true \
   --user-agent="Mozilla/5.0" \
   --check-certificate=false
+
 ```
 > Stop with `killall aria2c` or check status with `ps aux | grep aria2c`.
 
