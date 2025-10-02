@@ -177,6 +177,105 @@ sudo systemctl restart nginx php8.4-fpm
 > Place any static files in `~/Downloads/http` and access them via `<server-ip>/`.
 ---
 
+
+### B. Nginx (HTTP)
+```bash
+
+cat <<'EOF' | sudo tee /home/ubuntu/Downloads/http/index.php > /dev/null
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>All File Links (excluding .php)</h2>
+
+<?php
+$directory = '.';
+$baseUrl = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
+
+$files = [];
+if ($handle = opendir($directory)) {
+    while (false !== ($entry = readdir($handle))) {
+        $filePath = $directory . '/' . $entry;
+        if ($entry != "." && $entry != ".." && is_file($filePath) && pathinfo($entry, PATHINFO_EXTENSION) !== 'php') {
+            $files[] = $baseUrl . '/' . rawurlencode($entry);
+        }
+    }
+    closedir($handle);
+}
+?>
+
+<textarea id="fileLinks" readonly><?php echo implode("\n", $files); ?></textarea>
+<br>
+<button onclick="copyLinks()">Copy All Links</button>
+<button onclick="downloadLinks()">Download All</button>
+
+<script>
+function copyLinks() {
+    const textarea = document.getElementById('fileLinks');
+    textarea.select();
+    document.execCommand('copy');
+}
+
+function downloadLinks() {
+    const links = document.getElementById('fileLinks').value.trim().split('\n');
+
+    if (!links.length || links[0] === '') {
+        alert("No links to send.");
+        return;
+    }
+
+    fetch('aria2_download.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ links: links })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        console.log(data);
+    })
+    .catch(error => {
+        alert("Failed to send download request.");
+        console.error(error);
+    });
+}
+</script>
+
+</body>
+</html>
+
+EOF
+
+
+```
+
+---
+
+
+
 ## 5️⃣ Advanced Downloaders
 ### aria2c (RPC + BitTorrent)
 ```bash
