@@ -102,6 +102,32 @@ chmod -R 755 ~/Downloads/{TMP,N}
 ```
 ---
 
+
+##  QBittorrent
+```bash
+sudo apt install -y qbittorrent
+
+# Optional: set up dedicated download folders
+mkdir -p ~/Downloads/TMP ~/Downloads/N
+chown -R $USER:$USER ~/Downloads/{TMP,N}
+chmod -R 755 ~/Downloads/{TMP,N}
+
+sudo ufw status
+sudo ufw allow 48844/tcp
+sudo ufw allow 48844/udp
+sudo ufw reload
+
+# ~/.config/qBittorrent/
+
+
+mkdir -p ~/.config/qBittorrent
+wget https://raw.githubusercontent.com/M-IT3/Ubuntu2/refs/heads/main/qBittorrent.conf -O ~/.config/qBittorrent/qBittorrent.conf
+
+```
+---
+
+
+
 ## 4️⃣ Shared Directories
 ### A. Samba (SMB)
 ```bash
@@ -178,7 +204,7 @@ sudo systemctl restart nginx php8.4-fpm
 ---
 
 
-### B. Nginx (HTTP)
+### Add index
 ```bash
 
 cat <<'EOF' | sudo tee /home/ubuntu/Downloads/http/index.php > /dev/null
