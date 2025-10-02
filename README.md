@@ -64,7 +64,7 @@ sudo systemctl enable --now xrdp
 sudo adduser $USER ssl-cert
 # Allow RDP in UFW
 sudo ufw allow 3389/tcp
-sudo reboot   # required after adding user to ssl‑cert
+# sudo reboot   # required after adding user to ssl‑cert
 
 # ---- SSH (if not already enabled) ----
 sudo systemctl enable --now ssh
