@@ -318,7 +318,7 @@ aria2c --enable-rpc \
   --max-connection-per-server=16 \
   --min-split-size=1M \
   --split=16 \
-  --max-concurrent-downloads=28 \
+  --max-concurrent-downloads=48 \
   --bt-request-peer-speed-limit=10M \
   --bt-max-peers=55 \
   --seed-ratio=1.0 \
