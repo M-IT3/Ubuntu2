@@ -308,25 +308,28 @@ EOF
 sudo apt install -y aria2
 mkdir -p ~/Downloads/Aria
 chmod -R 755 ~/Downloads/Aria
+```
 
+```bash
 aria2c --enable-rpc \
-  aria2c --enable-rpc \
-  --rpc-listen-all=true \
   --rpc-listen-port=6800 \
-  --max-upload-limit=300 \
   -D \
-  -d ~/Downloads/Aria/ \
+  -d /home/ubuntu/Downloads/Aria/ \
   --max-connection-per-server=16 \
   --min-split-size=1M \
   --split=16 \
   --max-concurrent-downloads=48 \
+  --max-overall-download-limit=0 \
+  --max-upload-limit=300 \
   --bt-request-peer-speed-limit=10M \
   --bt-max-peers=55 \
   --seed-ratio=1.0 \
   --follow-torrent=true \
   --disable-ipv6=true \
   --user-agent="Mozilla/5.0" \
-  --check-certificate=false
+  --check-certificate=false \
+  --rpc-secure=false \
+  --rpc-listen-all=true
 
 ```
 > Stop with `killall aria2c` or check status with `ps aux | grep aria2c`.
