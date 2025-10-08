@@ -337,9 +337,10 @@ aria2c --enable-rpc \
 ### JDownloader (Java)
 ```bash
 sudo apt install -y default-jre
-mkdir -p ~/jd2/JDownloader2
+mkdir -p ~/jd2 ~/jd2/JDownloader2
+
 wget http://installer.jdownloader.org/JDownloader2Setup_unix_nojre.sh -O ~/jd2/JDownloader2Setup.sh
-chmod +x ~/jd2/JDownloader2Setup.sh && ./~/jd2/JDownloader2Setup.sh -q -dir ~/jd2/JDownloader2
+chmod +x ~/jd2/JDownloader2Setup.sh && ~/jd2/JDownloader2Setup.sh -q -dir ~/jd2/JDownloader2
 ```
 ---
 
