@@ -366,6 +366,36 @@ sudo reboot   # final reboot to apply all changes
 ```
 ---
 
+## Add -User
+```bash
+sudo adduser vortex
+sudo adduser vortex ssl-cert
+sudo systemctl restart ssh
+
+## Root Access
+sudo usermod -aG sudo vortex
+groups vortex
+sudo whoami
+
+sudo visudo
+Vortex ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/dpkg
+# vortex  ALL=(ALL) NOPASSWD: ALL
+
+ssh Vortex@<your_server_ip>
+
+
+## Delete User
+ sudo deluser vortex
+ sudo deluser --remove-home vortex
+ sudo deluser vortex ssl-cert
+ cat /etc/passwd | grep vortex
+
+
+```
+---
+
+
+
 ## ⚙️ Automate All of the Above
 Copy the following script into a file, e.g. `setup.sh`, make it executable and run it.
 ```bash
