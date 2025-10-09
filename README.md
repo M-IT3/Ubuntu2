@@ -344,6 +344,28 @@ chmod +x ~/jd2/JDownloader2Setup.sh && ~/jd2/JDownloader2Setup.sh -q -dir ~/jd2/
 ```
 ---
 
+
+### Visual Studio Code (VS Code)
+```bash
+CD Downloads
+wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/03c265b1adee71ac88f833e065f7bb956b60550a/code_1.105.0-1759933565_amd64.deb
+sudo dpkg -i code_1.105.0-1759933565_amd64.deb
+sudo apt --fix-broken install
+
+
+# Python 
+sudo apt install python3-pip
+sudo apt install python3-venv
+
+python3 -m venv ~/Desktop/myenv
+source ~/Desktop/myenv/bin/activate
+
+```
+---
+
+
+
+
 ## 6️⃣ Monitoring / Utilities
 ```bash
 # Glances (CLI & web)
@@ -471,18 +493,6 @@ chmod +x /home/ubuntu/JDownloader2/setup.sh
 /home/ubuntu/JDownloader2/setup.sh -q -dir /home/ubuntu/JDownloader2
 
 
-# 7️⃣ Visual Studio Code (VS Code)
-CD Downloads 
-wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/03c265b1adee71ac88f833e065f7bb956b60550a/code_1.105.0-1759933565_amd64.deb
-sudo dpkg -i code_1.105.0-1759933565_amd64.deb
-sudo apt --fix-broken install
-
-# Python 
-sudo apt install python3-pip
-sudo apt install python3-venv
-
-python3 -m venv ~/Desktop/myenv
-source ~/Desktop/myenv/bin/activate
 
 
 
