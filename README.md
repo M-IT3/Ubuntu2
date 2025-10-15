@@ -444,7 +444,7 @@ cat <<'EOF' | sudo tee /etc/nginx/sites-available/default > /dev/null
 server {
     listen 80;
     listen [::]:80;
-    server_name yourdomain.com www.yourdomain.com;
+    server_name igpt.live www.igpt.live;
     return 301 https://$host$request_uri;
 }
 
@@ -452,10 +452,10 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl;
     
-    server_name yourdomain.com www.yourdomain.com;
+    server_name igpt.live www.igpt.live;
     
-    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/igpt.live/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/igpt.live/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
     
@@ -483,6 +483,9 @@ sudo systemctl restart nginx php8.4-fpm
 
 ```
 ---
+
+
+
 
 ## ⚙️ Automate All of the Above
 Copy the following script into a file, e.g. `setup.sh`, make it executable and run it.
