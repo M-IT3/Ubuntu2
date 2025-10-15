@@ -425,6 +425,65 @@ sudo chmod 777 /_Data/
 ```
 ---
 
+```bash
+##SSL
+sudo apt update
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d igpt.live -d www.igpt.live
+## Enter Email temp.v@..
+
+#check SSL details:
+sudo certbot certificates
+
+# Set Up Automatic Certificate Renewal
+sudo certbot renew --dry-run
+
+
+# Default site config
+cat <<'EOF' | sudo tee /etc/nginx/sites-available/default > /dev/null
+server {
+    listen 80;
+    listen [::]:80;
+    server_name yourdomain.com www.yourdomain.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    
+    server_name yourdomain.com www.yourdomain.com;
+    
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    
+    root /home/ubuntu/Downloads/http;
+    index index.html index.php;
+
+    location / {
+        autoindex on;
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.4-fpm.sock;
+    }
+
+    location ~ /.ht { deny all; }
+}
+
+EOF
+
+sudo systemctl restart nginx php8.4-fpm
+``
+
+
+```
+---
+
 ## ⚙️ Automate All of the Above
 Copy the following script into a file, e.g. `setup.sh`, make it executable and run it.
 ```bash
