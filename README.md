@@ -417,6 +417,13 @@ ssh Vortex@<your_server_ip>
 ---
 
 
+```bash
+## Creat Dir For All Users 
+sudo mkdir /_Data/
+sudo chmod 777 /_Data/
+
+```
+---
 
 ## ⚙️ Automate All of the Above
 Copy the following script into a file, e.g. `setup.sh`, make it executable and run it.
