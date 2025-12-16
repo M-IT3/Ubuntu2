@@ -29,7 +29,7 @@ EOF
 ```
 ---
 
-## 4️⃣ PHP 
+
 
 ```bash
 systemctl daemon-reexec
@@ -45,75 +45,47 @@ systemctl start qbittorrent-nox
 
 
 
-                $encodedPath = implode('/', array_map(
-                    'rawurlencode',
-                    explode(DIRECTORY_SEPARATOR, $relativePath)
-                ));
+## 4️⃣ PHP | 
+```bash
+# Install stack
+sudo apt install -y nginx php php-fpm
 
-                $files[] = $baseUrl . '/' . $encodedPath;
-            }
-        }
-    }
-}
+# Directory to host files
+mkdir -p ~/Downloads/http
+chmod -R 755 ~/Downloads/http
+sudo chown -R ubuntu:ubuntu /home/ubuntu/Downloads/http
+sudo chmod -R 755 /home/ubuntu/Downloads/http
+sudo chmod o+x /home
+sudo chmod o+x /home/ubuntu
+sudo chmod o+x /home/ubuntu/Downloads
 
-scanDirRecursive($baseDir, $baseDir, $baseUrl, $files, $ignoredExtensions);
-sort($files);
-$fileCount = count($files);
-?>
+# Default site config
+cat <<'EOF' | sudo tee /etc/nginx/sites-available/default > /dev/null
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-<!-- ---------- CONTROLS ---------- -->
-<div class="controls">
-    <form method="get">
-        <label>
-            Ignore extensions:
-            <input type="text" name="ignore"
-                   value="<?php echo htmlspecialchars($ignoreInput); ?>">
-        </label>
-        <button type="submit">Refresh List</button>
-    </form>
-</div>
+    root /home/ubuntu/Downloads/http;
+    index index.html index.php;
 
-<h3>Total Files Found: <?php echo $fileCount; ?></h3>
+    server_name _;
 
-<textarea id="fileLinks" readonly><?php echo implode("\n", $files); ?></textarea>
-
-<br>
-<button onclick="copyLinks()">Copy All Links</button>
-<button onclick="downloadLinks()">Download All</button>
-
-<script>
-function copyLinks() {
-    const textarea = document.getElementById('fileLinks');
-    textarea.select();
-    document.execCommand('copy');
-}
-
-function downloadLinks() {
-    const links = document.getElementById('fileLinks').value.trim().split('\n');
-
-    if (!links.length || links[0] === '') {
-        alert("No links to send.");
-        return;
+    location / {
+        autoindex on;                # show file list
+        try_files $uri $uri/ =404;
     }
 
-    fetch('aria2_download.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ links: links })
-    })
-    .then(res => res.json())
-    .then(data => alert(data.message))
-    .catch(err => {
-        alert("Failed to send download request.");
-        console.error(err);
-    });
-}
-</script>
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.4-fpm.sock;   # adjust if needed
+    }
 
-</body>
-</html>
+    location ~ /.ht { deny all; }
+}
 EOF
 
+sudo systemctl restart nginx php8.4-fpm
 ```
-
+> Place any static files in `~/Downloads/http` and access them via `<server-ip>/`.
 ---
+
