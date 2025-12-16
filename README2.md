@@ -230,3 +230,39 @@ function downloadLinks() {
 </html>
 EOF
 ```
+
+
+##  5️⃣ Advanced Downloaders
+
+```bash
+
+sudo apt install -y aria2
+mkdir -p Downloads/q/Aria
+chmod -R 755 Downloads/q/Aria
+```
+---
+
+```bash
+
+aria2c --enable-rpc \
+  --rpc-listen-port=6800 \
+  -D \
+  -d Downloads/q/Aria/ \
+  --max-connection-per-server=16 \
+  --min-split-size=1M \
+  --split=16 \
+  --max-concurrent-downloads=48 \
+  --max-overall-download-limit=0 \
+  --max-upload-limit=300 \
+  --bt-request-peer-speed-limit=10M \
+  --bt-max-peers=55 \
+  --seed-ratio=1.0 \
+  --follow-torrent=true \
+  --disable-ipv6=true \
+  --user-agent="Mozilla/5.0" \
+  --check-certificate=false \
+  --rpc-secure=false \
+  --rpc-listen-all=true
+
+```
+---
