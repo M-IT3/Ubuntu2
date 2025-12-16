@@ -237,8 +237,8 @@ EOF
 ```bash
 
 sudo apt install -y aria2
-mkdir -p Downloads/q/Aria
-chmod -R 755 Downloads/q/Aria
+mkdir -p /root/Downloads/q/Aria
+chmod -R 755 /root/Downloads/q/Aria
 ```
 ---
 
@@ -247,7 +247,7 @@ chmod -R 755 Downloads/q/Aria
 aria2c --enable-rpc \
   --rpc-listen-port=6800 \
   -D \
-  -d Downloads/q/Aria/ \
+  -d /root/Downloads/q/Aria/ \
   --max-connection-per-server=16 \
   --min-split-size=1M \
   --split=16 \
