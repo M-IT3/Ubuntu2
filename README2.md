@@ -1,3 +1,8 @@
+```bash
+sudo passwd root
+```
+---
+
 ##  4️⃣ QBittorrent
 ```bash
 
