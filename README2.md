@@ -1,3 +1,4 @@
+## Pass
 ```bash
 sudo passwd root
 ```
