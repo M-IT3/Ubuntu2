@@ -272,3 +272,26 @@ aria2c --enable-rpc \
 
 ```
 ---
+
+
+
+##  >>>>  n_m3u8dl Colab, Ubuntu
+```bash
+!wget https://github.com/nilaoda/N_m3u8DL-RE/releases/download/v0.2.1-beta/N_m3u8DL-RE_Beta_linux-x64_20240828.tar.gz -O n_m3u8dl.tar.gz
+!tar -xzf n_m3u8dl.tar.gz
+!sudo mv /content/N_m3u8DL-RE_Beta_linux-x64/N_m3u8DL-RE /usr/local/bin/
+!chmod +x /usr/local/bin/N_m3u8DL-RE
+!N_m3u8DL-RE --version
+
+# Download the Bento4 SDK archive
+!wget https://www.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-641.x86_64-unknown-linux.zip -O bento4.zip
+
+# Unzip and move decrypt tools into your PATH
+!unzip bento4.zip
+!sudo mv /content/Bento4-SDK-1-6-0-641.x86_64-unknown-linux/bin/* /usr/local/bin/
+!sudo chmod +x /usr/local/bin/*
+
+# Optional: verify mp4decrypt is installed
+!/usr/local/bin/mp4decrypt
+```
+---
