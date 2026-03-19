@@ -83,14 +83,14 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.3-fpm.sock;   # adjust if needed
+        fastcgi_pass unix:/run/php/php8.4-fpm.sock;   # adjust if needed
     }
 
     location ~ /.ht { deny all; }
 }
 EOF
 
-sudo systemctl restart nginx php8.3-fpm
+sudo systemctl restart nginx php8.4-fpm
 ```
 > Place any static files in `~/Downloads/http` and access them via `<server-ip>/`.
 ---
